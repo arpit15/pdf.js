@@ -380,6 +380,10 @@ class LinkAnnotationElement extends AnnotationElement {
     const { data, linkService } = this;
     const link = document.createElement("a");
 
+    // create a tooltiptext obj
+    const tooltiptxt = document.createElement("span");
+    tooltiptxt.className = "tooltiptxt";
+
     if (data.url) {
       addLinkAttributes(link, {
         url: data.url,
@@ -393,6 +397,9 @@ class LinkAnnotationElement extends AnnotationElement {
       this._bindNamedAction(link, data.action);
     } else if (data.dest) {
       this._bindLink(link, data.dest);
+      // debugger;
+      tooltiptxt.innerHTML = data.dest;
+      link.appendChild(tooltiptxt);
     } else if (
       data.actions &&
       (data.actions.Action || data.actions.MouseUp || data.actions.MouseDown) &&
